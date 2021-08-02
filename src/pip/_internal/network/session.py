@@ -219,7 +219,9 @@ class LocalFSAdapter(BaseAdapter):
             stats = os.stat(pathname)
         except OSError as exc:
             resp.status_code = 404
-            resp.raw = exc
+            # format the error message
+            exc_message = f"{type(exc).__name__}: {exc}"
+            resp.raw = io.BytesIO(exc_message.encode("utf8"))
         else:
             modified = email.utils.formatdate(stats.st_mtime, usegmt=True)
             content_type = mimetypes.guess_type(pathname)[0] or "text/plain"
