@@ -154,7 +154,7 @@ To build it locally, run:
 
 .. code-block:: console
 
-    $ tox -e docs
+    $ nox -s docs
 
 The built documentation can be found in the ``docs/build`` folder.
 
